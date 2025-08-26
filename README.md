@@ -1,10 +1,11 @@
-# Sistema-Gestion-Centro-Logistica
+# Sistema de Gestion para Centro de Logistica
 Sistema para la gestión de operaciones de recepción y envío de paquetería en un centro de logística. 
 
 OBJETIVO DEL PROYECTO:
 
-El objetivo del proyecto es desarrollar un sistema para la gestión de operaciones de recepción y envío de paquetería en un centro de logística. 
-El sistema permitirá registrar paquetes, generar su código de seguimiento, asignarlos a rutas de distribución, y almacenar la información para su posterior consulta. También se encargará de calcular el costo de envío teniendo en cuenta tamaño, precio por unidad, peso y destino.
+El objetivo del proyecto es desarrollar un sistema para la gestión de operaciones de recepción y envío de paquetería en un centro de logística, que permitirá registrar paquetes, generar su código de seguimiento, asignarlos a rutas de distribución, y almacenar la información para su posterior consulta. También se encargará de calcular el costo de envío teniendo en cuenta tamaño, precio por unidad, peso y destino.
+Con ello se buscará mejorar el control de los envíos para reducir errores, optimizar la gestión operativa, aumentar la eficiencia en el cálculo de los costos de envío y mejorar la experiencia de los usuarios.
+
 
 ALCANCE: 
 El sistema deberá cumplir con los siguientes requisitos por cada uno de los paquetes a ingresar:
