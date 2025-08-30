@@ -47,7 +47,7 @@ SUCURSAL      RECAUDACIÓN
 2                 XXXX.XX
 3                 XXXX.XX
 4                 XXXX.XX
------------------------------
+
 RECAUDACIÓN TOTAL  XXXX.XX
 
 f)Cantidad total de envíos realizados.
