@@ -34,7 +34,7 @@ b)Sucursal que más dinero recaudó.
 c)Zona que más envíos recibió.
 d)Total recaudado por sucursal:
 
- SUCURSAL/ZONA DESTINO    01          02         03         04
+SUCURSAL/ZONA DESTINO    01          02         03         04
      1              XXXX.XX     XXXX.XX    XXXX.XX    XXXX.XX
      2              XXXX.XX     XXXX.XX    XXXX.XX    XXXX.XX
      3              XXXX.XX     XXXX.XX    XXXX.XX    XXXX.XX
