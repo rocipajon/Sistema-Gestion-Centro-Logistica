@@ -42,12 +42,12 @@ SUCURSAL/ZONA DESTINO    01          02         03         04
 
 e)Total recaudado entre todas las sucursales:
 
-SUCURSAL          RECAUDACIÓN
- 1                   xxxx.xx
- 2                   xxxx.xx
- 3                   xxxx.xx
- 4                   xxxx.xx
- -----------------------------
- RECAUDACIÓN TOTAL   xxxx.xx
+SUCURSAL         RECAUDACIÓN
+1                   xxxx.xx
+2                   xxxx.xx
+3                   xxxx.xx
+4                   xxxx.xx
+-----------------------------
+RECAUDACIÓN TOTAL   xxxx.xx
 
 f)Cantidad total de envíos realizados.
