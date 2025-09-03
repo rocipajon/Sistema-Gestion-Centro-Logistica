@@ -8,10 +8,12 @@ def llenadoListas(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres):
     llegada=random.randint(1,4)
     peso=random.randint(1,40)
     expres=random.randint(1,4)
+    #Genero calores autopaticos para dsp igualarlos a diferentes valores 
     pesoPaquete.append(peso)
     sucursalSalida.append(sucursal)   
     sucursalEnvio.append(llegada)
     envioExpres.append(expres)
+    #Guardo los valores en las listas
     return(sucursal,llegada,peso,expres)
 
 def calculoPersona(s,d,p,e):
@@ -39,13 +41,14 @@ def calculoPersona(s,d,p,e):
         if d==1 or d==2 or d==3:
             costoPorPeso=costoPorPeso*1.1
     if e==1:
-        costoPorPeso=costoPorPeso*1.3    
+        costoPorPeso=costoPorPeso*1.3
+    #Calculo el precio del envio dependiendo de las variables 
     return(costoPorPeso)
 
 def facturaCliente(sucursal,llegada,peso,expres,costoPaquete):
     salida=0
     destino=0
-    expres=0
+    rapido=0
     if sucursal==1:
         salida="Zona Norte"
     elif sucursal==2:
@@ -65,11 +68,11 @@ def facturaCliente(sucursal,llegada,peso,expres,costoPaquete):
         destino="Zona CABA"
     
     if expres==1:
-        espres="Si"
+        rapido="Si"
     else:
-        expres="No"
-    
-    print(f"\nSalida: {salida}\nDestino: {destino}\nPeso: {peso}kg\nExpres: {expres}\nPrecio total: {round(costoPaquete,2)}")
+        rapido="No"
+    #Le agrego nombre a los distintos numeros y imprimo una factura del cliente
+    print(f"\nSalida: {salida}\nDestino: {destino}\nPeso: {peso}kg\nExpres: {rapido}\nPrecio total: {round(costoPaquete,2)}$")
     
     
     
@@ -85,13 +88,13 @@ def inicializacion():
         sucursal,llegada,peso,expres=llenadoListas(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres)
         costoPaquete=calculoPersona(sucursal,llegada,peso,expres)
         facturaCliente(sucursal,llegada,peso,expres,costoPaquete)
-        print(f"{sucursalSalida}\n{sucursalEnvio}\n{pesoPaquete}\n{envioExpres}")
-        confirmacion=input("\nQuiere agregar otro envio?(si|no): ").lower()
+        print(f"{sucursalSalida}\n{sucursalEnvio}\n{pesoPaquete}\n{envioExpres}")#Lista impresa para corroborar datos
+        confirmacion=input("\nQuiere agregar otro envio?(si|no): ").lower()#Poder generar nuevo envio sin volver al menu
     menu()
     
 def cierre():
     confirmacion=input("Quiere realizar el cierre del dia(si|no):")
-    while confirmacion != "si" and confirmacion != "no":
+    while confirmacion != "si" and confirmacion != "no":#Evito palabras equivocas
         confirmacion = input("Respuesta inválida. Escriba (si|no): ").lower()
     if confirmacion=="no":
         menu()
