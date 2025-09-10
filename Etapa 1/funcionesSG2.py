@@ -47,6 +47,8 @@ def calculoEnvio(sucursal,destino,peso,expres):
             costoPorPeso=costoPorPeso*1.1
     if expres==1:
         costoPorPeso=costoPorPeso*1.3
+    if costoPorPeso<1500:
+        costoPorPeso=1500
     costoPorPeso=round(costoPorPeso,2)
     #Calculo el precio del envio dependiendo de las variables 
     return costoPorPeso 
