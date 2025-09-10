@@ -1,9 +1,6 @@
 #FuncionesSG2.py
 
 import random
-
-#Codificación sucursales
-
 # 1 Norte
 # 2 Sur
 # 3 Oeste
@@ -24,9 +21,6 @@ def llenadoListas(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres):
 
     return (sucursal,llegada,peso,expres)
 
-#Calculo del valor del envío teniendo en cuenta:
-
-#Sucursal de salida, zona de destino, peso y tipo de envío: estandar/express
 def calculoEnvio(sucursal,destino,peso,expres):
     costoPorPeso=(peso*1000)
     if sucursal==1:
@@ -105,8 +99,8 @@ def validaSioNo(confirmacion):
 
     return confirmacion
 
-#Recaudación por cada sucursal
 def recaudacionSuc(costoPaquete,sucursal,recaudado):
+    #Calcula el total recaudado por sucursal
     if sucursal==1:
         aux=recaudado[0]+costoPaquete
         recaudado[0]=aux
@@ -120,26 +114,28 @@ def recaudacionSuc(costoPaquete,sucursal,recaudado):
         aux=recaudado[3]+costoPaquete
         recaudado[3]=aux
         
-#Generación de envíos
+            
 def generarEnvio(sucursalSalida, sucursalEnvio, pesoPaquete, envioExpres, recaudado, facturaMatriz4x4):
     confirmacion = input("\nAgregar un nuevo envio?(si|no): ").lower()
     confirmacion = validaSioNo(confirmacion)
-
+    
     while confirmacion == "si":
         sucursal, llegada, peso, expres = llenadoListas(sucursalSalida, sucursalEnvio, pesoPaquete, envioExpres)
         costoPaquete = calculoEnvio(sucursal, llegada, peso, expres)
 
-        recaudacionSuc(costoPaquete, sucursal, recaudado)# suma por sucursal
-        actualizar_matriz(facturaMatriz4x4, sucursal, llegada, costoPaquete)# suma en la celda [sucursal-1][destino-1]
+        recaudacionSuc(costoPaquete, sucursal, recaudado)           # suma por sucursal
+        actualizar_matriz(facturaMatriz4x4, sucursal, llegada, costoPaquete)  # suma en la celda [sucursal-1][destino-1]
         facturaCliente(sucursal, llegada, peso, expres, costoPaquete)
 
+        # Debug opcional
         print(f"{sucursalSalida}\n{sucursalEnvio}\n{pesoPaquete}\n{envioExpres}")
 
         confirmacion = input("\nAgregar un nuevo envio?(si|no): ").lower()
         confirmacion = validaSioNo(confirmacion)
         
-#Contador  
+        
 def contadorLista(lista):
+    #buscamos la sucursal que mas envio y la zona que mas recibio
     maximo=0
     localidad=0
     primero=lista.count(1)                
@@ -150,20 +146,20 @@ def contadorLista(lista):
     for i in range(4):
         if primero>maximo:
             maximo=primero
-            localidad="Norte"
+            localidad="norte"
         elif segundo>maximo:
             maximo=segundo
-            localidad="Sur"
+            localidad="sur"
         elif tercero>maximo:
             maximo=tercero
-            localidad="Oeste"
+            localidad="oeste"
         elif cuarto>maximo:
             maximo=cuarto
-            localidad="CABA"
+            localidad="caba"
     return (maximo,localidad)
 
-#Sucursal de mayor recaudación
 def sucMayorReca(recaudado):
+    #busca la cucursal que hizo la mayor recaudacion
     maximo=max(recaudado)
     pos=recaudado.index(maximo)
     if pos==0:
@@ -176,17 +172,29 @@ def sucMayorReca(recaudado):
         pos="caba"
     return (maximo,pos)
 
-#Matriz
 def crear_matriz_4x4():
+    # 4 filas (sucursales 1..4) x 4 columnas (destinos 1..4)
     return [[0.0 for _ in range(4)] for _ in range(4)]
 
 def actualizar_matriz(m4x4, sucursal, destino, costo):
+    # sucursal y destino vienen 1..4 -> a índices 0..3
     m4x4[sucursal - 1][destino - 1] += costo
 
 def imprimir_matriz(m4x4):
-    print("-------------------------------------")
-    print("SUCURSAL/ZONA DESTINO\t01\t02\t03\t04")
-    print("-------------------------------------")
-    for i in range(4): 
-        print(f"{i+1}\t\t\t{m4x4[i][0]}\t{m4x4[i][1]}\t{m4x4[i][2]}\t{m4x4[i][3]}")
-    print("-------------------------------------")
+    print("SUCURSAL/ZONA DESTINO   01      02      03      04")
+    for i, fila in enumerate(m4x4, start=1):
+        print(str(i) + "                       " +
+              str(fila[0]) + "     " +
+              str(fila[1]) + "     " +
+              str(fila[2]) + "     " +
+              str(fila[3]))
+    print("--------------------------------------------------")
+
+
+
+
+
+
+
+
+

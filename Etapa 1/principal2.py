@@ -2,7 +2,6 @@
 
 import funcionesSG2
 
-#Imprimir recaudación total
 def recaTotal(recaudado):
     ganancia=sum(recaudado)
     print("-------------------------------------")
@@ -12,6 +11,7 @@ def recaTotal(recaudado):
     print("-------------------------------------")
     
 def main():
+
     sucursalSalida=[]
     sucursalEnvio=[]
     pesoPaquete=[]
@@ -19,6 +19,7 @@ def main():
     recaudado=[0,0,0,0]
     facturaMatriz = funcionesSG2.crear_matriz_4x4()
 
+    #Menu principal - Unifiqué inicialización - cierre y menu
     confirmacion="0"
     while confirmacion != "3":
         confirmacion = input("\n1.Envios\n2.Cierre diario\nopcion(1|2): ")
@@ -59,6 +60,7 @@ def main():
                 
                 # alcance E (matriz 4x4 de recaudación por sucursal x destino)
                 funcionesSG2.imprimir_matriz(facturaMatriz)
+                
                 
                 confirmacion = "3"
                 
