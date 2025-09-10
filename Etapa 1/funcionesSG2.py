@@ -1,6 +1,9 @@
-#FuncionesSG.py
+#FuncionesSG2.py
 
 import random
+
+#Codificación sucursales
+
 # 1 Norte
 # 2 Sur
 # 3 Oeste
@@ -21,6 +24,9 @@ def llenadoListas(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres):
 
     return (sucursal,llegada,peso,expres)
 
+#Calculo del valor del envío teniendo en cuenta:
+
+#Sucursal de salida, zona de destino, peso y tipo de envío: estandar/express
 def calculoEnvio(sucursal,destino,peso,expres):
     costoPorPeso=(peso*1000)
     if sucursal==1:
@@ -47,7 +53,7 @@ def calculoEnvio(sucursal,destino,peso,expres):
             costoPorPeso=costoPorPeso*1.1
     if expres==1:
         costoPorPeso=costoPorPeso*1.3
-    round(costoPorPeso,2)
+    costoPorPeso=round(costoPorPeso,2)
     #Calculo el precio del envio dependiendo de las variables 
     return costoPorPeso 
 
@@ -99,6 +105,7 @@ def validaSioNo(confirmacion):
 
     return confirmacion
 
+#Recaudación por cada sucursal
 def recaudacionSuc(costoPaquete,sucursal,recaudado):
     if sucursal==1:
         aux=recaudado[0]+costoPaquete
@@ -113,27 +120,25 @@ def recaudacionSuc(costoPaquete,sucursal,recaudado):
         aux=recaudado[3]+costoPaquete
         recaudado[3]=aux
         
-    
-
-def generarEnvio(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres,recaudado):
-    #Generar nuevos envíos
+#Generación de envíos
+def generarEnvio(sucursalSalida, sucursalEnvio, pesoPaquete, envioExpres, recaudado, facturaMatriz4x4):
     confirmacion = input("\nAgregar un nuevo envio?(si|no): ").lower()
     confirmacion = validaSioNo(confirmacion)
 
     while confirmacion == "si":
+        sucursal, llegada, peso, expres = llenadoListas(sucursalSalida, sucursalEnvio, pesoPaquete, envioExpres)
+        costoPaquete = calculoEnvio(sucursal, llegada, peso, expres)
 
-        sucursal,llegada,peso,expres = llenadoListas(sucursalSalida,sucursalEnvio,pesoPaquete,envioExpres)
-        costoPaquete = calculoEnvio(sucursal,llegada,peso,expres)
-        recaudacionSuc(costoPaquete,sucursal,recaudado)
-        facturaCliente(sucursal,llegada,peso,expres,costoPaquete)
+        recaudacionSuc(costoPaquete, sucursal, recaudado)# suma por sucursal
+        actualizar_matriz(facturaMatriz4x4, sucursal, llegada, costoPaquete)# suma en la celda [sucursal-1][destino-1]
+        facturaCliente(sucursal, llegada, peso, expres, costoPaquete)
 
-        #Lista impresa para corroborar datos
         print(f"{sucursalSalida}\n{sucursalEnvio}\n{pesoPaquete}\n{envioExpres}")
 
         confirmacion = input("\nAgregar un nuevo envio?(si|no): ").lower()
         confirmacion = validaSioNo(confirmacion)
         
-        
+#Contador  
 def contadorLista(lista):
     maximo=0
     localidad=0
@@ -145,18 +150,19 @@ def contadorLista(lista):
     for i in range(4):
         if primero>maximo:
             maximo=primero
-            localidad="norte"
+            localidad="Norte"
         elif segundo>maximo:
             maximo=segundo
-            localidad="sur"
+            localidad="Sur"
         elif tercero>maximo:
             maximo=tercero
-            localidad="oeste"
+            localidad="Oeste"
         elif cuarto>maximo:
             maximo=cuarto
-            localidad="caba"
+            localidad="CABA"
     return (maximo,localidad)
 
+#Sucursal de mayor recaudación
 def sucMayorReca(recaudado):
     maximo=max(recaudado)
     pos=recaudado.index(maximo)
@@ -169,14 +175,18 @@ def sucMayorReca(recaudado):
     elif pos==3:
         pos="caba"
     return (maximo,pos)
-    
-    
 
+#Matriz
+def crear_matriz_4x4():
+    return [[0.0 for _ in range(4)] for _ in range(4)]
 
+def actualizar_matriz(m4x4, sucursal, destino, costo):
+    m4x4[sucursal - 1][destino - 1] += costo
 
-
-
-
-
-
-
+def imprimir_matriz(m4x4):
+    print("-------------------------------------")
+    print("SUCURSAL/ZONA DESTINO\t01\t02\t03\t04")
+    print("-------------------------------------")
+    for i in range(4): 
+        print(f"{i+1}\t\t\t{m4x4[i][0]}\t{m4x4[i][1]}\t{m4x4[i][2]}\t{m4x4[i][3]}")
+    print("-------------------------------------")
